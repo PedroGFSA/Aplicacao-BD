@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teste', function (Blueprint $table) {
-            $table->string('palavra');
+        Schema::create('livro_reserva', function (Blueprint $table) {
+            $table->foreignId('livro_id')->constrained('livros');
+            $table->foreignId('reserva_id')->constrained('reservas');
+            
         });
     }
 
@@ -21,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teste');
+        Schema::dropIfExists('livro_reserva');
     }
 };

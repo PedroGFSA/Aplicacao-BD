@@ -14,8 +14,8 @@
     <h1>Atualizar reserva</h1>
      
 
-    <label for="livro_isbn">ISBN do livro</label>
-    <input type="text" name="livro_isbn" value="{{$reserva->livro_isbn}}">
+    <label for="livro_isbn">ID do Livro</label>
+    <input type="text" name="livro_id" value="{{$reserva->livro_id}}">
 
     <label for="mat_aluno">Matrícula do Aluno</label>
     <input type="text" name="mat_aluno" value="{{$reserva->mat_aluno}}">

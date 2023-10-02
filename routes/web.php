@@ -38,9 +38,17 @@ Route::post('/cadastrar-livro', function(Request $dados) {
 
 Route::get('/mostrar-livro/{id}', function($id) {
   $livro = Livro::findOrFail($id);
-  echo "ISBN: " . $livro->id;
+  echo "ID do Livro: " . $livro->id;
   echo "<br/>";
   echo "Título: " . $livro->titulo;
+  echo "<br/>";
+  echo "Autor: " . $livro->autor;
+  echo "<br/>";
+  echo "Categoria: " . $livro->categoria;
+  echo "<br/>";
+  echo "Código da seção: " . $livro->cod_secao;
+  echo "<br/>";
+  echo "Data de publicação: " . $livro->data_publicacao;
 });
 
 Route::get('/atualizar-livro/{id}', function($id) {
@@ -81,9 +89,17 @@ Route::post('/cadastrar-pessoa', function(Request $dados) {
 
 Route::get('/mostrar-pessoa/{cpf}', function($cpf) {
   $pessoa = Pessoa::findOrFail($cpf);
+  echo "CPF: " . $pessoa->cpf;
+  echo "<br/>";
   echo "Nome: " . $pessoa->primeiro_nome;
   echo "<br/>";
+  echo "Sobrenome: " . $pessoa->sobrenome;
+  echo "<br/>";
   echo "Telefone: " . $pessoa->telefone;
+  echo "<br/>";
+  echo "Email: " . $pessoa->email;
+  echo "<br/>";
+  echo "Data de nascimento: " . $pessoa->data_nascimento;
 });
 
 Route::get('/atualizar-pessoa/{cpf}', function($cpf) {
@@ -130,7 +146,7 @@ Route::post('/cadastrar-reserva', function(Request $dados) {
 
 Route::get('/mostrar-reserva/{id}', function($id) {
   $reserva = Reserva::findOrFail($id);
-  echo "ID do Livro: " . $reserva->id;
+  echo "ID do Livro: " . $reserva->livro_id;
   echo "<br/>";
   echo "Matrícula do aluno: " . $reserva->mat_aluno;
   echo "<br/>";
@@ -144,17 +160,18 @@ Route::get('/atualizar-reserva/{id}', function($id) {
 
 Route::put("/atualizar-reserva/{id}", function(Request $dados, $id) {
  $reserva = Reserva::findOrFail($id);
- $reserva->livro_isbn = $dados->livro_isbn;
+ $reserva->livros()->detach($reserva->livro_id);
+ $reserva->livro_id = $dados->livro_id;
  $reserva->mat_aluno = $dados->mat_aluno;
  $reserva->mat_funcionario = $dados->mat_funcionario;
- 
+ $reserva->livros()->attach($dados->livro_id);
  $reserva->save();
  echo "Reserva atualizada com sucesso!";
 });
 
 Route::get("/deletar-reserva/{id}", function($id) {
   $reserva = Reserva::findOrFail($id);
-  $reserva->livros()->detach($id);
+  $reserva->livros()->detach($reserva->livro_id);
   $reserva->delete();
   echo "Reserva desfeita com sucesso!";
 });

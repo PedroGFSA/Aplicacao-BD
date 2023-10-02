@@ -19,16 +19,16 @@
     <input type="text" name="primeiro_nome" value="{{$pessoa->primeiro_nome}}">
 
     <label for="sobrenome">Sobrenome</label>
-    <input type="text" name="sobrenome">
+    <input type="text" name="sobrenome" value="{{$pessoa->sobrenome}}">
 
     <label for="telefone">Telefone</label>
-    <input type="text" name="telefone">
+    <input type="text" name="telefone" value="{{$pessoa->telefone}}">
 
     <label for="email">Email</label>
-    <input type="email" name="email">
+    <input type="email" name="email" value="{{$pessoa->email}}">
 
     <label for="data_nascimento">Data de nascimento</label>
-    <input type="date" name="data_nascimento">
+    <input type="date" name="data_nascimento" value="{{$pessoa->data_nascimento}}">
 
     <button>Atualizar</button>
   </form>
